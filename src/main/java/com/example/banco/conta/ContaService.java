@@ -71,18 +71,14 @@ public class ContaService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            // Obter o nome de usuário do usuário autenticado
             String username = authentication.getName();
 
-            // Carregar o usuário do banco de dados com base no nome de usuário
             Usuario usuario = usuarioService.getByUsernameEntity(username);
 
-            // Verificar se o CPF do cliente associado à conta é o mesmo que o CPF do cliente associado ao usuário autenticado
             if (usuario.getCpf() == null || !usuario.getCpf().equals(cliente.getCpf())) {
                 throw new RuntimeException("CPF do usuário autenticado não corresponde ao CPF do cliente associado à conta");
             }
 
-            // Verificar se o saldo é suficiente para o saque
             if (conta.getSaldo().compareTo(contaDto.getValor()) >= 0 && contaDto.getValor() > 0) {
                 double taxa = 0;
                 if (cliente.getTipo() == TIPO_PESSOA.PJ) {
@@ -105,18 +101,14 @@ public class ContaService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            // Obter o nome de usuário do usuário autenticado
             String username = authentication.getName();
 
-            // Carregar o usuário do banco de dados com base no nome de usuário
             Usuario usuario = usuarioService.getByUsernameEntity(username);
 
-            // Verificar se o CPF do cliente associado à conta é o mesmo que o CPF do cliente associado ao usuário autenticado
             if (usuario.getCpf() == null || !usuario.getCpf().equals(cliente.getCpf())) {
                 throw new RuntimeException("CPF do usuário autenticado não corresponde ao CPF do cliente associado à conta");
             }
 
-            // Verificar se o saldo é suficiente para a transferência
             if (conta.getSaldo().compareTo(contaDto.getValor()) >= 0 && contaDto.getValor() > 0) {
                 double taxa = 0;
                 if (cliente.getTipo() == TIPO_PESSOA.PJ) {
@@ -141,18 +133,15 @@ public class ContaService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            // Obter o nome de usuário do usuário autenticado
             String username = authentication.getName();
 
 
-            // Carregar o usuário do banco de dados com base no nome de usuário
             Usuario usuario = usuarioService.getByUsernameEntity(username);
 
             if (usuario.getCpf() == null || !usuario.getCpf().equals(cliente.getCpf())) {
                 throw new RuntimeException("CPF do usuário autenticado não corresponde ao CPF do cliente associado à conta");
             }
 
-            // Verificar se o valor do depósito é válido
             if (contaDto.getValor() > 0) {
                 conta.setSaldo(conta.getSaldo() + contaDto.getValor());
                 return this.convertDto(contaRepository.save(conta));
@@ -172,18 +161,14 @@ public class ContaService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            // Obter o nome de usuário do usuário autenticado
             String username = authentication.getName();
 
-            // Carregar o usuário do banco de dados com base no nome de usuário
             Usuario usuario = usuarioService.getByUsernameEntity(username);
 
-            // Verificar se o CPF do cliente associado à conta é o mesmo que o CPF do cliente associado ao usuário autenticado
             if (usuario.getCpf() == null || !usuario.getCpf().equals(cliente.getCpf())) {
                 throw new RuntimeException("CPF do usuário autenticado não corresponde ao CPF do cliente associado à conta");
             }
 
-            // Verificar se o valor do investimento é válido
             if (contaDto.getValor() > 0) {
                 double rendimento = 0;
                 if (cliente.getTipo() == TIPO_PESSOA.PF) {

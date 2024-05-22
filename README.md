@@ -31,31 +31,28 @@
 
 # Padrões de Projeto Utilizados no Projeto
 
-## 1. Builder Pattern
+## . Builder Pattern
 - **Classe:** `Cliente`
 - **Caminho:** `com.example.banco.cliente.Cliente`
 - **Linha do código:** `@Builder`
 - **Descrição:** O padrão Builder é utilizado para facilitar a criação de objetos complexos. No caso da classe `Cliente`, a notação `@Builder` do LOMBOK permite a construção de instâncias da classe `Cliente` com uma interface mais legível e fluida.
 
-## 2. Factory Pattern
+## . Factory Pattern
 - **Classe:** `ClienteFactory`
 - **Caminho:** `com.example.banco.cliente.ClienteFactoryImpl`
-- **Linha do código:** `public Cliente criarCliente(String nome, String cpf, LocalDate dataNascimento, TIPO_PESSOA tipo, String status)`
 - **Descrição:** O padrão Factory é utilizado para criar objetos sem expor a lógica de criação ao cliente e referenciar a nova classe gerada por meio de uma interface comum. Aqui, a fábrica `ClienteFactoryImpl` encapsula a lógica de criação de clientes.
 
-## 3. Singleton Pattern
+- **Classe:** `ContaFactory`
+- **Caminho:** `com.example.banco.cliente.ContaFactoryImpl`
+- **Descrição:** O padrão Factory é utilizado para criar objetos sem expor a lógica de criação ao cliente e referenciar a nova classe gerada por meio de uma interface comum. Aqui, a fábrica `ClienteFactoryImpl` encapsula a lógica de criação de clientes.
+
+## . Singleton Pattern
 - **Classe:** `ModelMapper`
 - **Caminho:** `com.example.banco.BancoApplication`
-- **Linha do código:** `@Bean public ModelMapper modelMapper()`
 - **Descrição:** O padrão Singleton é utilizado para garantir que uma classe tenha apenas uma instância e forneça um ponto de acesso global a essa instância. O bean `ModelMapper` é configurado como singleton no contexto do Spring, garantindo que a mesma instância seja usada em toda a aplicação.
 
-## 4. Strategy Pattern
-- **Classe:** `ClienteService`
-- **Caminho:** `com.example.banco.cliente.ClienteService`
-- **Linha do código:** `private final ClienteFactory clienteFactory;`
-- **Descrição:** O padrão Strategy permite que uma classe tenha seu comportamento alterado em tempo de execução. No `ClienteService`, a estratégia para criar clientes é injetada por meio da `ClienteFactory`, permitindo a troca da lógica de criação sem alterar o código do serviço.
 
-## 5. Decorator Pattern
+## . Decorator Pattern
 - **Classe:** `JwtAuthFilter`
 - **Caminho:** `com.example.banco.security.WebSecurityConfig`
 - **Linha do código:** `.addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)`
